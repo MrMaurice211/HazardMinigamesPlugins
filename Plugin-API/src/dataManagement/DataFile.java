@@ -1,4 +1,4 @@
-package dataManagment;
+package dataManagement;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -39,27 +39,25 @@ public class DataFile {
 
     //Methods
     /**
-     * Adds a variable to the dataFile that can be altered and deleted at will.
-     *
-     * @param variable the variable that is wanted to be added
-     * @param path the path in the dataFile that the variable is going to occupy
+     * Sets a variable to the dataFile that can be altered and deleted at will.
+     *  @param path the path in the dataFile that the variable is going to occupy
+     * @param o the variable that is wanted to be added
      * @param save save the file right after adding the variable? (not recommended if adding multiple variables at the
-     *             same time)
      */
-    public void add(Object variable, String path, boolean save) {
-        config.set(path, variable);
+    public void set(String path, Object o, boolean save) {
+        config.set(path, o);
         if (save) saveData();
     }
 
     /**
-     * Adds a variable to the dataFile that can be altered and deleted at will. This method does not save after adding
+     * Sets a variable to the dataFile that can be altered and deleted at will. This method does not save after adding
      * the variable.
      *
-     * @param variable the variable that is wanted to be added
      * @param path the path in the dataFile that the variable is going to occupy
+     * @param variable the variable that is wanted to be added
      */
-    public void add(Object variable, String path) {
-        add(variable, path, false);
+    public void set(String path, Object variable) {
+        set(path, variable, false);
     }
 
     /**
@@ -68,7 +66,7 @@ public class DataFile {
      * @param path path to the variable
      * @param save save the file right after deleting the variable? (not recommended for rapid deletion)
      */
-    public void delete(String path, boolean save) {
+    public void remove(String path, boolean save) {
         config.set(path, null);
         if (save) saveData();
     }
@@ -78,30 +76,17 @@ public class DataFile {
      *
      * @param path path to the variable
      */
-    public void delete(String path) {
-        delete(path, false);
+    public void remove(String path) {
+        remove(path, false);
     }
 
     /**
-     * Sets a variable in a specified path of the dataFile.
+     * Gets a variable in a specified path of the dataFile.
      *
      * @param path path to the variable in the DataFolder
-     * @param save save the file afterwards? (not recommended for rapid changes)
-     * @param <Type> type of the variable you are trying to reach
      */
-    public <Type> void get(Type type, String path, boolean save) {
-        config.get(path, type);
-        if (save) saveData();
-    }
-
-    /**
-     * Sets a variable in a specified path of the dataFile. Does not save afterwards.
-     *
-     * @param path path to the variable in the DataFolder
-     * @param <Type> type of the variable you are trying to reach
-     */
-    public <Type> void get(Type type, String path) {
-        get(type, path, false);
+    public Object get(String path) {
+        return config.get(path);
     }
 
     /**
@@ -113,6 +98,13 @@ public class DataFile {
         } catch (IOException error) {
             error.printStackTrace();
         }
+    }
+
+    /**
+     * Deletes the dataFile
+     */
+    public void delete() {
+        file.delete();
     }
 
     //Getters
