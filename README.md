@@ -1,4 +1,4 @@
 # HazardMinigamesPlugins
 Code shit for code people
+testst
 
-test
