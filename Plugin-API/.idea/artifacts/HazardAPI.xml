@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="HazardAPI">
+    <output-path>$PROJECT_DIR$</output-path>
+    <root id="archive" name="HazardAPI.jar">
+      <element id="module-output" name="Plugin-API" />
+    </root>
+  </artifact>
+</component>
